@@ -1,0 +1,14 @@
+#!/bin/bash
+
+read -e -p "Enter path to output file: " OUTPUT_FILE
+
+set -x
+
+adb devices > $OUTPUT_FILE
+echo "Brand: $(adb shell getprop ro.product.brand)" >> $OUTPUT_FILE
+echo "Manufacturer: $(adb shell getprop ro.product.manufacturer)" >> $OUTPUT_FILE
+echo "Model: $(adb shell getprop ro.product.model)" >> $OUTPUT_FILE
+echo "Name: $(adb shell getprop ro.product.name)" >> $OUTPUT_FILE
+echo "Serial Number: $(adb shell getprop ro.serialno)" >> $OUTPUT_FILE
+echo "Android version: $(adb shell getprop ro.build.version.release)" >> $OUTPUT_FILE
+echo "SDK version: $(adb shell getprop ro.build.version.sdk)" >> $OUTPUT_FILE
