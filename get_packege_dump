@@ -18,8 +18,6 @@ adb shell dumpsys appops --package $packageName > "${dumpDir}/appops.txt"
 adb shell dumpsys usagestats $packageName > "${dumpDir}/usage_stats.txt"
 adb shell dumpsys batterystats $packageName > "${dumpDir}/battery_stats.txt"
 adb shell dumpsys activity $packageName > "${dumpDir}/activity.txt"
-adb logcat -d | grep -iE "$PKG" > "${dumpDir}/logs.txt"
-
-set +x
+adb logcat -d | grep -iE $packageName > "${dumpDir}/logs.txt"
 
 echo Done!
