@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Request of package name
+echo "Enter package name:"
+read packageName
+
+# Request of output
+echo "Enter output directory name:"
+read outputDir
+dumpDir="${outputDir}/${packageName}_dump"
+mkdir -p "${dumpDir}"
+cd "${dumpDir}"
+
+set -x
+
+adb shell dumpsys package $packageName > "${dumpDir}/package_info.txt"
+adb shell dumpsys appops --package $packageName > "${dumpDir}/appops.txt"
+adb shell dumpsys usagestats $packageName > "${dumpDir}/usage_stats.txt"
+adb shell dumpsys batterystats $packageName > "${dumpDir}/battery_stats.txt"
+adb shell dumpsys activity $packageName > "${dumpDir}/activity.txt"
+adb logcat -d | grep -iE "$PKG" > "${dumpDir}/logs.txt"
+
+set +x
+
+echo Done!
